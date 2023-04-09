@@ -1,35 +1,43 @@
 #include<stdio.h>
-int binarysearch(int a[],int l,int h,int key)
-{
-    int mid=(l+h)/2;
-    if(a[mid]==key)
-        return 1;
-    else if(key>a[mid])
-        return binarysearch(a,mid+1,h,key);
-    else if(key<a[mid])
-        return binarysearch(a,l,mid-1,key);
-    else
-        return 0;
-}
+#include<stdlib.h>
+void search (int[],int ,int );
 int main()
 {
-    int a[20],i,n,key,flag=0;
-    printf("enter size of array:");
-    scanf("%d",&n);
-    printf("enter elements:");
-    for(i=0;i<n;i++)
+    int n,m,a[10],key;
+    printf("No of cases: ");
+    scanf("%d",&m);
+    for(int i=0;i<m;i++)
     {
-        scanf("%d",&a[i]);
+        printf("enter size of array: ");
+        scanf("%d",&n);
+        printf("enter elements: ");
+        for(int j=0;j<n;j++)
+        scanf("%d",&a[j]);
+        printf("Enter the element to search: ");
+        scanf("%d",&key);
+        search(a,n,key);
     }
-    printf("enter search key: ");
-    scanf("%d",&key);
-    flag=binarysearch(a,0,n-1,key);
-    if (flag==1)
+    return 0;
+}
+void search(int a[],int n,int key)
+{
+    int mid=0,low=1,high=n,f=0;
+    while(low<=high)
     {
-        printf("present\n");
+        mid =(low+high)/2;
+        if(a[mid]==key)
+        {
+            printf("Present  %d",mid);
+            f=1;
+            break;
+        }
+        else if(key<a[mid])
+        high=mid;
+        else
+        low=mid+1;
     }
-    else
+    if(f==0)
     {
-        printf("not present\n");
+        printf("Element not present");
     }
 }
